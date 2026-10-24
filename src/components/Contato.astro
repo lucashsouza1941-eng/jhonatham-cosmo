@@ -1,0 +1,22 @@
+---
+import { whatsappUrl } from '../data/site';
+---
+<section class="contact" id="contato">
+  <div class="wrap contact-inner">
+    <div>
+      <h2>VAMOS CONVERSAR?</h2>
+      <p>Tem alguma dúvida, quer encomendar uma obra<br />ou criar um projeto personalizado? Fale comigo.</p>
+    </div>
+    <a class="btn" href={whatsappUrl('Olá, Jhonatham! Gostaria de conversar sobre suas obras.')} target="_blank" rel="noopener">
+      ◉ &nbsp; Entrar em contato&nbsp; →
+    </a>
+  </div>
+</section>
+
+<style>
+  .contact { padding: 35px 0; background: linear-gradient(90deg, #080808ef, #080808b0), url('/images/contato.jpg') center / cover no-repeat; border-bottom: 1px solid var(--line); }
+  .contact-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  h2 { font-size: 17px; letter-spacing: 1.5px; font-weight: 500; margin: 0 0 8px; }
+  p { margin: 0; color: #c4c0bb; font-size: 12px; }
+  @media (max-width: 760px) { .contact-inner { align-items: flex-start; flex-direction: column; } }
+</style>

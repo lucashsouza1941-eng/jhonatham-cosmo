@@ -1,0 +1,27 @@
+---
+import { nav, whatsappUrl } from '../data/site';
+---
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="/#inicio">Jhonatham<span>Cosmo</span></a>
+    <nav class="nav" aria-label="Principal">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <div class="icons">
+      <a href="/obras" aria-label="Ver obras">⌕</a>
+      <a href={whatsappUrl('Olá! Gostaria de saber mais sobre as obras do Jhonatham Cosmo.')} target="_blank" rel="noopener" aria-label="WhatsApp">◉</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .topbar { height: 76px; display: flex; align-items: center; border-bottom: 1px solid #ffffff18; background: #080808; position: relative; z-index: 2; }
+  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+  .icons { display: flex; gap: 22px; font-size: 20px; }
+  .icons a:hover { color: var(--red-hover); }
+  @media (max-width: 760px) {
+    .topbar { height: 68px; }
+    .nav { display: none; }
+    .icons { gap: 13px; }
+  }
+</style>

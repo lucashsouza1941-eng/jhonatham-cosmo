@@ -1,0 +1,16 @@
+---
+import ObraCard from './ObraCard.astro';
+import type { Obra } from '../data/obras';
+
+interface Props { obras: Obra[] }
+const { obras } = Astro.props;
+---
+<div class="art-grid">
+  {obras.map((obra) => <ObraCard obra={obra} />)}
+</div>
+
+<style>
+  .art-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 25px; }
+  @media (max-width: 760px) { .art-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 14px; } }
+  @media (max-width: 420px) { .art-grid { gap: 23px 12px; } }
+</style>

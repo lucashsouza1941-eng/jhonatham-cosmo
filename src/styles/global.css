@@ -1,0 +1,61 @@
+:root {
+  --bg: #090909;
+  --panel: #111;
+  --paper: #f0ede6;
+  --ink: #151515;
+  --muted: #aaa6a0;
+  --red: #c3261d;
+  --red-hover: #e34a3d;
+  --line: #292522;
+  --max: 1320px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: #f6f4f0; font-family: Arial, Helvetica, sans-serif; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+img { max-width: 100%; }
+
+.wrap { width: min(var(--max), calc(100% - 8vw)); margin: auto; }
+
+.eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: #c9c2bb; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 14px;
+  padding: 14px 23px; border: 1px solid var(--red);
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  transition: background .2s; background: transparent; color: #fff; cursor: pointer;
+}
+.btn:hover { background: var(--red); }
+
+.brand {
+  font-weight: 900; font-style: italic; letter-spacing: -1.5px;
+  font-size: 23px; line-height: .85; transform: rotate(-5deg); display: inline-block;
+}
+.brand span { display: block; margin-left: 13px; }
+
+.nav { display: flex; gap: 38px; font-size: 11px; letter-spacing: 1.7px; text-transform: uppercase; }
+.nav a:hover { color: var(--red-hover); }
+
+.section { padding: 38px 0 42px; }
+.section-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 22px; }
+.section-head h1, .section-head h2 { margin: 8px 0 0; font-size: 30px; letter-spacing: 2px; }
+.text-link { font-size: 10px; letter-spacing: 1.3px; text-transform: uppercase; }
+.text-link:hover { color: var(--red-hover); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .wrap { width: calc(100% - 36px); }
+  .nav { gap: 17px; }
+  .section { padding: 30px 0; }
+  .section-head h1, .section-head h2 { font-size: 25px; }
+}
+@media (max-width: 420px) {
+  .eyebrow { letter-spacing: 2.5px; }
+  .section-head { align-items: start; gap: 12px; }
+  .section-head h1, .section-head h2 { font-size: 22px; }
+  .text-link { font-size: 8px; white-space: nowrap; margin-top: 15px; }
+  .brand { font-size: 20px; }
+}

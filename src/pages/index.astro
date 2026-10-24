@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import ObrasGrid from '../components/ObrasGrid.astro';
+import Sobre from '../components/Sobre.astro';
+import Beneficios from '../components/Beneficios.astro';
+import Contato from '../components/Contato.astro';
+import { obras } from '../data/obras';
+
+const destaques = obras.filter((o) => o.destaque).slice(0, 4);
+---
+<Base>
+  <Hero />
+  <section class="section" id="obras">
+    <div class="wrap">
+      <div class="section-head">
+        <div><div class="eyebrow">Galeria</div><h2>OBRAS EM DESTAQUE</h2></div>
+        <a class="text-link" href="/obras">Ver todas as obras&nbsp; →</a>
+      </div>
+      <ObrasGrid obras={destaques} />
+    </div>
+  </section>
+  <Sobre />
+  <Beneficios />
+  <Contato />
+</Base>

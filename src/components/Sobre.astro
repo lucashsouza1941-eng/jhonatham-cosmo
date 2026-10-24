@@ -1,0 +1,24 @@
+<section class="about" id="sobre">
+  <div class="about-photo"><div class="scribble" aria-hidden="true">ARTE<br />TAMBÉM<br />É TATTOO</div></div>
+  <div class="about-copy">
+    <div class="eyebrow">Sobre o artista</div>
+    <h2>JHONATHAM COSMO</h2>
+    <p>Tatuador por paixão e artista por essência. Meu trabalho é uma fusão entre a pele e a tela, onde o traço se transforma em expressão, liberdade e verdade.</p>
+    <p>Cada obra carrega um pedaço da minha história, das minhas influências e da minha visão de mundo. A arte sempre foi o meu jeito de existir — agora, também em quadros.</p>
+    <a class="btn" href="/#contato">Conheça mais&nbsp; →</a>
+  </div>
+</section>
+
+<style>
+  .about { display: grid; grid-template-columns: 1fr 1fr; min-height: 300px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .about-photo { background: linear-gradient(90deg, #0000, #0005), url('/images/sobre.jpg') center / cover no-repeat; min-height: 300px; position: relative; }
+  .scribble { position: absolute; left: 7%; top: 24%; font-weight: 900; font-style: italic; font-size: 27px; line-height: .95; transform: rotate(-9deg); text-shadow: 0 2px 8px #000; }
+  .about-copy { padding: 42px clamp(24px, 5vw, 70px); align-self: center; }
+  h2 { font-size: 25px; letter-spacing: 1px; margin: 12px 0 16px; }
+  p { font-size: 13px; line-height: 1.8; color: #c4c0bb; max-width: 520px; }
+  @media (max-width: 760px) {
+    .about { grid-template-columns: 1fr; }
+    .about-photo { min-height: 250px; }
+    .about-copy { padding: 32px 22px; }
+  }
+</style>
