@@ -3,7 +3,7 @@
 Site/portfólio de obras do artista e tatuador Jhonatham Cosmo, construído com **[Astro](https://astro.build)** (Node.js). Gera um site 100% estático: rápido, ótimo para SEO e grátis para hospedar.
 
 ## Requisitos
-- Node.js 18.20+ (recomendado 20 ou 22)
+- Node.js 22.23.4+ (exigido pelo Astro 7)
 
 ## Rodando localmente
 ```bash
@@ -14,22 +14,27 @@ npm run dev               # http://localhost:4321
 
 ## Build de produção
 ```bash
-npm run build             # gera a pasta dist/
+npm run build             # gera a pasta dist/ (e o sitemap)
 npm run preview           # serve o build localmente
 ```
+
+O build **falha de propósito** se `PUBLIC_WHATSAPP_NUMBER` estiver ausente, fora do formato
+(55 + DDD + número) ou ainda for o número de exemplo, para o site nunca ir ao ar com os botões
+"Comprar" apontando para o lugar errado. Em `npm run dev` aparece só um aviso.
 
 ## Estrutura
 ```
 public/
   images/                 hero.jpg, sobre.jpg, contato.jpg
   images/obras/           fotos das obras
-  favicon.svg, robots.txt
+  favicon.svg
 src/
   data/site.ts            nome, WhatsApp, redes sociais, menu, benefícios
   data/obras.ts           catálogo de obras (título, medidas, preço, imagem...)
   layouts/Base.astro      <head>, SEO/Open Graph, header + footer
-  components/             Header, Hero, ObraCard, ObrasGrid, Sobre, Beneficios, Contato, Footer
+  components/             Header (com menu do celular), Hero, ObraCard, ObrasGrid, Sobre, Beneficios, Contato, Footer, Icon (SVGs)
   pages/
+    robots.txt.ts         robots.txt gerado, aponta para o sitemap
     index.astro           home
     obras/index.astro     /obras — galeria completa
     obras/[slug].astro    /obras/conexao etc. — página de cada obra
@@ -45,7 +50,7 @@ src/
 | Marcar obra como vendida | `disponivel: false` no item da obra |
 | Tirar obra da home | `destaque: false` |
 | Instagram / TikTok | `src/data/site.ts` → `redes` |
-| Domínio do site | `astro.config.mjs` → `site` |
+| Domínio do site | `astro.config.mjs` → `site` (canonical, Open Graph, sitemap e robots.txt usam ele) |
 
 ## Deploy
 Qualquer host estático. Comando de build `npm run build`, pasta de saída `dist`.

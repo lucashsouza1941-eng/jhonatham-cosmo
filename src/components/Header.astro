@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { nav, whatsappUrl } from '../data/site';
 ---
 <header class="topbar">
@@ -8,20 +9,71 @@ import { nav, whatsappUrl } from '../data/site';
       {nav.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
     <div class="icons">
-      <a href="/obras" aria-label="Ver obras">⌕</a>
-      <a href={whatsappUrl('Olá! Gostaria de saber mais sobre as obras do Jhonatham Cosmo.')} target="_blank" rel="noopener" aria-label="WhatsApp">◉</a>
+      <a href={whatsappUrl('Olá! Gostaria de saber mais sobre as obras do Jhonatham Cosmo.')} target="_blank" rel="noopener" aria-label="WhatsApp">
+        <Icon name="whatsapp" size={22} />
+      </a>
+      <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-mobile">
+        <span class="when-closed"><Icon name="menu" size={24} /></span>
+        <span class="when-open"><Icon name="close" size={24} /></span>
+      </button>
     </div>
   </div>
+  <nav class="mobile-nav" id="menu-mobile" aria-label="Menu" hidden>
+    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
 </header>
 
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
+  const menu = document.querySelector<HTMLElement>('#menu-mobile');
+  if (btn && menu) {
+    const setOpen = (open: boolean) => {
+      menu.hidden = !open;
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+    };
+    btn.addEventListener('click', () => setOpen(menu.hidden));
+    // Fecha ao escolher um item e com Esc. Em âncoras da mesma página, fecha antes
+    // de rolar: o menu sumindo no meio da rolagem suave faz o navegador desistir dela.
+    menu.addEventListener('click', (e) => {
+      const link = (e.target as HTMLElement).closest('a');
+      if (!link) return;
+      setOpen(false);
+      const url = new URL(link.href);
+      const alvo = url.pathname === location.pathname && url.hash ? document.querySelector(url.hash) : null;
+      if (alvo) {
+        e.preventDefault();
+        history.pushState(null, '', url.hash);
+        requestAnimationFrame(() => alvo.scrollIntoView({ behavior: 'smooth' }));
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.hidden) {
+        setOpen(false);
+        btn.focus();
+      }
+    });
+  }
+</script>
+
 <style>
-  .topbar { height: 76px; display: flex; align-items: center; border-bottom: 1px solid #ffffff18; background: #080808; position: relative; z-index: 2; }
-  .topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
-  .icons { display: flex; gap: 22px; font-size: 20px; }
-  .icons a:hover { color: var(--red-hover); }
+  .topbar { border-bottom: 1px solid #ffffff18; background: #080808; position: relative; z-index: 2; }
+  .topbar-inner { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+  .icons { display: flex; align-items: center; gap: 18px; }
+  .icons a:hover, .menu-btn:hover { color: var(--red-hover); }
+  .menu-btn { display: none; background: none; border: 0; padding: 6px; margin: -6px; color: inherit; cursor: pointer; }
+  .menu-btn[aria-expanded='true'] .when-closed,
+  .menu-btn[aria-expanded='false'] .when-open { display: none; }
+  .mobile-nav { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+  .mobile-nav[hidden] { display: none; }
+  .mobile-nav a { padding: 16px 18px; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; border-bottom: 1px solid var(--line); }
+  .mobile-nav a:hover { color: var(--red-hover); }
   @media (max-width: 760px) {
-    .topbar { height: 68px; }
+    .topbar-inner { height: 68px; }
     .nav { display: none; }
-    .icons { gap: 13px; }
+    .menu-btn { display: block; }
+  }
+  @media (min-width: 761px) {
+    .mobile-nav { display: none !important; }
   }
 </style>

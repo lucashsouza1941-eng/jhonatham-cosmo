@@ -1,4 +1,5 @@
 ---
+import Icon from './Icon.astro';
 import { whatsappUrl } from '../data/site';
 ---
 <section class="contact" id="contato">
@@ -8,7 +9,7 @@ import { whatsappUrl } from '../data/site';
       <p>Tem alguma dúvida, quer encomendar uma obra<br />ou criar um projeto personalizado? Fale comigo.</p>
     </div>
     <a class="btn" href={whatsappUrl('Olá, Jhonatham! Gostaria de conversar sobre suas obras.')} target="_blank" rel="noopener">
-      ◉ &nbsp; Entrar em contato&nbsp; →
+      <Icon name="whatsapp" size={18} /> Entrar em contato <span aria-hidden="true">→</span>
     </a>
   </div>
 </section>
@@ -16,7 +17,7 @@ import { whatsappUrl } from '../data/site';
 <style>
   .contact { padding: 35px 0; background: linear-gradient(90deg, #080808ef, #080808b0), url('/images/contato.jpg') center / cover no-repeat; border-bottom: 1px solid var(--line); }
   .contact-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-  h2 { font-size: 17px; letter-spacing: 1.5px; font-weight: 500; margin: 0 0 8px; }
-  p { margin: 0; color: #c4c0bb; font-size: 12px; }
+  h2 { font-size: 20px; letter-spacing: 1.5px; font-weight: 500; margin: 0 0 8px; }
+  p { margin: 0; color: #c4c0bb; font-size: 14px; line-height: 1.5; }
   @media (max-width: 760px) { .contact-inner { align-items: flex-start; flex-direction: column; } }
 </style>

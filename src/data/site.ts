@@ -6,7 +6,7 @@ export const site = {
   descricao: 'Obras autorais e arte de Jhonatham Cosmo, tatuador e artista.',
   slogan: 'Obras que carregam identidade.',
   eyebrow: 'Arte autoral · Tattoo · Quadros',
-  whatsapp: import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? '5511999999999',
+  whatsapp: import.meta.env.PUBLIC_WHATSAPP_NUMBER, // validado no astro.config.mjs
   redes: {
     instagram: 'https://instagram.com/',
     tiktok: 'https://tiktok.com/',
