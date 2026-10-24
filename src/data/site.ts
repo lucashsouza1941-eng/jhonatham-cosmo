@@ -14,11 +14,17 @@ export const site = {
 };
 
 export const nav = [
-  { label: 'Início', href: '/#inicio' },
+  { label: 'Início', href: '/' },
   { label: 'Obras', href: '/obras' },
-  { label: 'Sobre', href: '/#sobre' },
-  { label: 'Contato', href: '/#contato' },
+  { label: 'Sobre', href: '/sobre' },
+  { label: 'Contato', href: '/contato' },
 ];
+
+// "Obras" fica marcada também nas páginas de cada obra (/obras/conexao...).
+export function paginaAtual(href: string, pathname: string): boolean {
+  const atual = pathname.replace(/\/+$/, '') || '/';
+  return href === '/' ? atual === '/' : atual === href || atual.startsWith(`${href}/`);
+}
 
 export const beneficios = [
   { simbolo: '♢', titulo: 'Compra segura', texto: 'Atendimento personalizado' },

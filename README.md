@@ -32,10 +32,12 @@ src/
   data/site.ts            nome, WhatsApp, redes sociais, menu, benefícios
   data/obras.ts           catálogo de obras (título, medidas, preço, imagem...)
   layouts/Base.astro      <head>, SEO/Open Graph, header + footer
-  components/             Header (com menu do celular), Hero, ObraCard, ObrasGrid, Sobre, Beneficios, Contato, Footer, Icon (SVGs)
+  components/             Header (menu + item ativo), Hero, ObraCard, ObrasGrid, Sobre, Beneficios, Footer, Icon (SVGs)
   pages/
     robots.txt.ts         robots.txt gerado, aponta para o sitemap
-    index.astro           home
+    index.astro           início: hero, obras em destaque e benefícios
+    sobre.astro           /sobre — sobre o artista
+    contato.astro         /contato — WhatsApp, motivos de contato e redes
     obras/index.astro     /obras — galeria completa
     obras/[slug].astro    /obras/conexao etc. — página de cada obra
     404.astro

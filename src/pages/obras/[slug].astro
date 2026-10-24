@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Contato from '../../components/Contato.astro';
 import { obras, formatarPreco, type Obra } from '../../data/obras';
 import { whatsappUrl } from '../../data/site';
 
@@ -29,7 +28,6 @@ const descricao = obra.descricao ?? `${obra.titulo} — obra autoral de Jhonatha
       </div>
     </div>
   </section>
-  <Contato />
 </Base>
 
 <style>

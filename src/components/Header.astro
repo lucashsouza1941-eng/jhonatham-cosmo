@@ -1,12 +1,12 @@
 ---
 import Icon from './Icon.astro';
-import { nav, whatsappUrl } from '../data/site';
+import { nav, paginaAtual, whatsappUrl } from '../data/site';
 ---
 <header class="topbar">
   <div class="wrap topbar-inner">
-    <a class="brand" href="/#inicio">Jhonatham<span>Cosmo</span></a>
+    <a class="brand" href="/">Jhonatham<span>Cosmo</span></a>
     <nav class="nav" aria-label="Principal">
-      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      {nav.map((item) => <a href={item.href} aria-current={paginaAtual(item.href, Astro.url.pathname) ? 'page' : undefined}>{item.label}</a>)}
     </nav>
     <div class="icons">
       <a href={whatsappUrl('Olá! Gostaria de saber mais sobre as obras do Jhonatham Cosmo.')} target="_blank" rel="noopener" aria-label="WhatsApp">
@@ -19,7 +19,7 @@ import { nav, whatsappUrl } from '../data/site';
     </div>
   </div>
   <nav class="mobile-nav" id="menu-mobile" aria-label="Menu" hidden>
-    {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    {nav.map((item) => <a href={item.href} aria-current={paginaAtual(item.href, Astro.url.pathname) ? 'page' : undefined}>{item.label}</a>)}
   </nav>
 </header>
 
@@ -33,20 +33,7 @@ import { nav, whatsappUrl } from '../data/site';
       btn.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
     };
     btn.addEventListener('click', () => setOpen(menu.hidden));
-    // Fecha ao escolher um item e com Esc. Em âncoras da mesma página, fecha antes
-    // de rolar: o menu sumindo no meio da rolagem suave faz o navegador desistir dela.
-    menu.addEventListener('click', (e) => {
-      const link = (e.target as HTMLElement).closest('a');
-      if (!link) return;
-      setOpen(false);
-      const url = new URL(link.href);
-      const alvo = url.pathname === location.pathname && url.hash ? document.querySelector(url.hash) : null;
-      if (alvo) {
-        e.preventDefault();
-        history.pushState(null, '', url.hash);
-        requestAnimationFrame(() => alvo.scrollIntoView({ behavior: 'smooth' }));
-      }
-    });
+    // Fecha com Esc (os itens levam a outras páginas, que já abrem com ele fechado).
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !menu.hidden) {
         setOpen(false);
@@ -61,6 +48,8 @@ import { nav, whatsappUrl } from '../data/site';
   .topbar-inner { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
   .icons { display: flex; align-items: center; gap: 18px; }
   .icons a:hover, .menu-btn:hover { color: var(--red-hover); }
+  .nav a[aria-current='page'] { color: var(--red-hover); }
+  .mobile-nav a[aria-current='page'] { color: var(--red-hover); border-left: 2px solid var(--red); }
   .menu-btn { display: none; background: none; border: 0; padding: 6px; margin: -6px; color: inherit; cursor: pointer; }
   .menu-btn[aria-expanded='true'] .when-closed,
   .menu-btn[aria-expanded='false'] .when-open { display: none; }

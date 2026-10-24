@@ -12,7 +12,9 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: #f6f4f0; font-family: Arial, Helvetica, sans-serif; }
+body { margin: 0; background: var(--bg); color: #f6f4f0; font-family: Arial, Helvetica, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+/* Páginas curtas: o rodapé fica no fim da tela em vez de no meio dela. */
+main { flex: 1; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 img { max-width: 100%; }

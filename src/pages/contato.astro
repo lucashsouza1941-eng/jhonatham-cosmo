@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site, whatsappUrl } from '../data/site';
+
+const motivos = [
+  { titulo: 'Comprar uma obra', texto: 'Pergunte se a obra está disponível, prazos e valores de entrega.', msg: 'Olá, Jhonatham! Tenho interesse em comprar uma obra.' },
+  { titulo: 'Encomendar uma obra', texto: 'Uma peça nova, pensada a partir da sua ideia.', msg: 'Olá, Jhonatham! Gostaria de encomendar uma obra.' },
+  { titulo: 'Projeto personalizado', texto: 'Tattoo ou arte sob medida, do traço à tela.', msg: 'Olá, Jhonatham! Quero conversar sobre um projeto personalizado.' },
+];
+
+const canais = [
+  { nome: 'WhatsApp', icone: 'whatsapp' as const, href: whatsappUrl('Olá, Jhonatham! Gostaria de conversar sobre suas obras.'), texto: 'Converse direto com o artista' },
+  { nome: 'Instagram', icone: 'instagram' as const, href: site.redes.instagram, texto: 'Acompanhe as obras' },
+  { nome: 'TikTok', icone: 'tiktok' as const, href: site.redes.tiktok, texto: 'Acompanhe as obras' },
+];
+---
+<Base title="Contato — Jhonatham Cosmo" description="Fale com Jhonatham Cosmo para comprar, encomendar uma obra ou criar um projeto personalizado." image="/images/contato.jpg">
+  <section class="contact-hero">
+    <div class="wrap">
+      <div class="eyebrow">Contato</div>
+      <h1>VAMOS CONVERSAR?</h1>
+      <p>Tem alguma dúvida, quer encomendar uma obra ou criar um projeto personalizado? Fale comigo.</p>
+      <a class="btn" href={whatsappUrl('Olá, Jhonatham! Gostaria de conversar sobre suas obras.')} target="_blank" rel="noopener">
+        <Icon name="whatsapp" size={18} /> Chamar no WhatsApp <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><div><div class="eyebrow">Como posso ajudar</div><h2>SOBRE O QUE VAMOS FALAR?</h2></div></div>
+      <div class="motivos">
+        {motivos.map((m) => (
+          <a class="motivo" href={whatsappUrl(m.msg)} target="_blank" rel="noopener">
+            <strong>{m.titulo}</strong>
+            <span>{m.texto}</span>
+            <em>Conversar <span aria-hidden="true">→</span></em>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section canais-sec">
+    <div class="wrap">
+      <div class="section-head"><div><div class="eyebrow">Canais</div><h2>ONDE ME ENCONTRAR</h2></div></div>
+      <div class="canais">
+        {canais.map((c) => (
+          <a class="canal" href={c.href} target="_blank" rel="noopener">
+            <Icon name={c.icone} size={28} />
+            <div><strong>{c.nome}</strong><span>{c.texto}</span></div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-hero {
+    padding: 80px 0 70px; border-bottom: 1px solid var(--line);
+    background: linear-gradient(90deg, #080808f2 0%, #080808c8 55%, #08080880 100%), url('/images/contato.jpg') center / cover no-repeat;
+  }
+  h1 { font-size: clamp(34px, 6vw, 64px); font-weight: 900; letter-spacing: 1px; margin: 16px 0 14px; }
+  .contact-hero p { font-family: Georgia, serif; font-style: italic; font-size: 19px; line-height: 1.5; color: #d3cdc6; max-width: 520px; margin: 0 0 28px; }
+
+  .motivos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .motivo { display: flex; flex-direction: column; gap: 10px; padding: 26px 24px; border: 1px solid var(--line); background: var(--panel); transition: border-color .2s; }
+  .motivo:hover { border-color: var(--red); }
+  .motivo strong { font-size: 14px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .motivo span { font-size: 14px; line-height: 1.6; color: #b5b0aa; }
+  .motivo em { font-style: normal; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--red-hover); margin-top: auto; padding-top: 8px; }
+
+  .canais-sec { border-top: 1px solid var(--line); }
+  .canais { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .canal { display: flex; align-items: center; gap: 16px; padding: 20px 22px; border: 1px solid var(--line); transition: border-color .2s, color .2s; }
+  .canal:hover { border-color: var(--red); color: var(--red-hover); }
+  .canal strong { display: block; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .canal span { font-size: 13px; color: #b5b0aa; }
+
+  @media (max-width: 760px) {
+    .contact-hero { padding: 56px 0 48px; }
+    .contact-hero p { font-size: 17px; }
+    .motivos, .canais { grid-template-columns: 1fr; gap: 14px; }
+  }
+</style>
