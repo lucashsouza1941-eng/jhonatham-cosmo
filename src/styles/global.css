@@ -1,18 +1,39 @@
+/* Tema escuro (padrão). O claro troca só as cores, em html[data-theme='light']. */
 :root {
+  color-scheme: dark;
   --bg: #090909;
+  --topbar: #080808;
   --panel: #111;
-  --paper: #f0ede6;
-  --ink: #151515;
-  --muted: #aaa6a0;
-  --red: #c3261d;
-  --red-hover: #e34a3d;
+  --text: #f6f4f0;
+  --text-2: #d3cdc6;      /* textos de apoio (subtítulos, parágrafos) */
+  --muted: #b5b0aa;       /* metadados, legendas */
+  --eyebrow: #c9c2bb;
   --line: #292522;
+  --line-strong: #4a4540; /* bordas de cards, ícones, imagens */
+  --overlay: 8 8 8;       /* cor (RGB) do degradê sobre as fotos */
+  --red: #c3261d;
+  --red-hover: #e34a3d;   /* texto/ícone vermelho no hover */
   --max: 1320px;
+}
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f4f1ea;
+  --topbar: #f4f1ea;
+  --panel: #ebe6dc;
+  --text: #151515;
+  --text-2: #3b3631;
+  --muted: #5f5952;
+  --eyebrow: #5f5952;
+  --line: #dcd5c9;
+  --line-strong: #b9b0a2;
+  --overlay: 244 241 234;
+  --red: #b3221a;
+  --red-hover: #a01d16;
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: #f6f4f0; font-family: Arial, Helvetica, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+body { margin: 0; background: var(--bg); color: var(--text); transition: background-color .25s, color .25s; font-family: Arial, Helvetica, sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
 /* Páginas curtas: o rodapé fica no fim da tela em vez de no meio dela. */
 main { flex: 1; }
 a { color: inherit; text-decoration: none; }
@@ -21,15 +42,15 @@ img { max-width: 100%; }
 
 .wrap { width: min(var(--max), calc(100% - 8vw)); margin: auto; }
 
-.eyebrow { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: #c9c2bb; }
+.eyebrow { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--eyebrow); }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 14px;
   padding: 14px 23px; border: 1px solid var(--red);
   font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
-  transition: background .2s; background: transparent; color: #fff; cursor: pointer;
+  transition: background .2s, color .2s; background: transparent; color: var(--text); cursor: pointer;
 }
-.btn:hover { background: var(--red); }
+.btn:hover { background: var(--red); color: #fff; }
 
 .brand {
   font-weight: 900; font-style: italic; letter-spacing: -1.5px;

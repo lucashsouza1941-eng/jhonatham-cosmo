@@ -24,6 +24,10 @@ const ogImage = new URL(image, Astro.site);
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#090909" />
+    <script is:inline>
+      // Antes de pintar a página: o escuro é o padrão; o claro só se a pessoa escolheu.
+      try { if (localStorage.getItem('tema') === 'light') document.documentElement.dataset.theme = 'light'; } catch {}
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:title" content={title} />

@@ -12,10 +12,10 @@
 <style>
   .about { display: grid; grid-template-columns: 1fr 1fr; min-height: min(70vh, 640px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .about-photo { background: linear-gradient(90deg, #0000, #0005), url('/images/sobre.jpg') center / cover no-repeat; min-height: 340px; position: relative; }
-  .scribble { position: absolute; left: 7%; top: 24%; font-weight: 900; font-style: italic; font-size: 27px; line-height: .95; transform: rotate(-9deg); text-shadow: 0 2px 8px #000; }
+  .scribble { position: absolute; left: 7%; top: 24%; font-weight: 900; font-style: italic; font-size: 27px; line-height: .95; transform: rotate(-9deg); color: #fff; text-shadow: 0 2px 8px #000; }
   .about-copy { padding: 42px clamp(24px, 5vw, 70px); align-self: center; }
   h1 { font-size: clamp(28px, 4vw, 40px); letter-spacing: 1px; margin: 12px 0 16px; }
-  p { font-size: 15px; line-height: 1.8; color: #c4c0bb; max-width: 520px; }
+  p { font-size: 15px; line-height: 1.8; color: var(--text-2); max-width: 520px; }
   @media (max-width: 760px) {
     .about { grid-template-columns: 1fr; }
     .about-photo { min-height: 250px; }

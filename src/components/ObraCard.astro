@@ -27,17 +27,17 @@ const msgDuvida = `Olá! Gostaria de saber mais sobre a obra ${obra.titulo}.`;
 
 <style>
   .thumb { display: block; overflow: hidden; }
-  img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; filter: saturate(.9); border: 1px solid #ffffff20; transition: transform .35s, filter .35s; }
+  img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; filter: saturate(.9); border: 1px solid var(--line-strong); transition: transform .35s, filter .35s; }
   .art-card:hover img { transform: translateY(-4px); filter: saturate(1.15); }
   h3 { font-size: 14px; font-weight: 500; letter-spacing: 1.5px; margin: 13px 0 7px; }
-  .meta { font-size: 12px; color: #b5b0aa; margin: 0 0 9px; }
+  .meta { font-size: 12px; color: var(--muted); margin: 0 0 9px; }
   .price { font-size: 15px; margin: 0 0 13px; }
   .buy-row { display: flex; gap: 8px; }
   .buy { padding: 12px 15px; min-width: 120px; border: 1px solid #8e3b30; text-align: center; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
-  .buy:hover { background: var(--red); }
-  .buy.sold { border-color: #444; color: #777; cursor: default; }
-  .buy.sold:hover { background: none; }
-  .wa { width: 42px; flex-shrink: 0; border: 1px solid #555; display: grid; place-items: center; }
+  .buy:hover { background: var(--red); color: #fff; }
+  .buy.sold { border-color: var(--line-strong); color: var(--muted); cursor: default; }
+  .buy.sold:hover { background: none; color: var(--muted); }
+  .wa { width: 42px; flex-shrink: 0; border: 1px solid var(--line-strong); display: grid; place-items: center; }
   .wa:hover { border-color: var(--red); }
   @media (max-width: 760px) {
     h3 { margin-top: 10px; }

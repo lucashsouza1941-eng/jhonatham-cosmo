@@ -9,6 +9,10 @@ import { nav, paginaAtual, whatsappUrl } from '../data/site';
       {nav.map((item) => <a href={item.href} aria-current={paginaAtual(item.href, Astro.url.pathname) ? 'page' : undefined}>{item.label}</a>)}
     </nav>
     <div class="icons">
+      <button class="theme-btn" type="button" aria-label="Ativar modo claro" title="Alternar tema">
+        <span class="when-dark"><Icon name="sun" size={21} /></span>
+        <span class="when-light"><Icon name="moon" size={21} /></span>
+      </button>
       <a href={whatsappUrl('Olá! Gostaria de saber mais sobre as obras do Jhonatham Cosmo.')} target="_blank" rel="noopener" aria-label="WhatsApp">
         <Icon name="whatsapp" size={22} />
       </a>
@@ -24,6 +28,25 @@ import { nav, paginaAtual, whatsappUrl } from '../data/site';
 </header>
 
 <script>
+  // Tema: o atributo já vem aplicado pelo script inline do <head> (Base.astro);
+  // aqui só alterna e guarda a escolha.
+  const temaBtn = document.querySelector<HTMLButtonElement>('.theme-btn');
+  if (temaBtn) {
+    const raiz = document.documentElement;
+    const sync = () => {
+      const claro = raiz.dataset.theme === 'light';
+      temaBtn.setAttribute('aria-label', claro ? 'Ativar modo escuro' : 'Ativar modo claro');
+      document.querySelector('meta[name="theme-color"]')?.setAttribute('content', claro ? '#f4f1ea' : '#090909');
+    };
+    sync();
+    temaBtn.addEventListener('click', () => {
+      const tema = raiz.dataset.theme === 'light' ? 'dark' : 'light';
+      raiz.dataset.theme = tema;
+      try { localStorage.setItem('tema', tema); } catch {}
+      sync();
+    });
+  }
+
   const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
   const menu = document.querySelector<HTMLElement>('#menu-mobile');
   if (btn && menu) {
@@ -44,10 +67,13 @@ import { nav, paginaAtual, whatsappUrl } from '../data/site';
 </script>
 
 <style>
-  .topbar { border-bottom: 1px solid #ffffff18; background: #080808; position: relative; z-index: 2; }
+  .topbar { border-bottom: 1px solid var(--line); background: var(--topbar); transition: background-color .25s; position: relative; z-index: 2; }
   .topbar-inner { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
   .icons { display: flex; align-items: center; gap: 18px; }
-  .icons a:hover, .menu-btn:hover { color: var(--red-hover); }
+  .icons a:hover, .menu-btn:hover, .theme-btn:hover { color: var(--red-hover); }
+  .theme-btn { background: none; border: 0; padding: 6px; margin: -6px; color: inherit; cursor: pointer; }
+  :global(html[data-theme='light']) .theme-btn .when-dark,
+  :global(html:not([data-theme='light'])) .theme-btn .when-light { display: none; }
   .nav a[aria-current='page'] { color: var(--red-hover); }
   .mobile-nav a[aria-current='page'] { color: var(--red-hover); border-left: 2px solid var(--red); }
   .menu-btn { display: none; background: none; border: 0; padding: 6px; margin: -6px; color: inherit; cursor: pointer; }

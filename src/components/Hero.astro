@@ -13,22 +13,22 @@ import { site } from '../data/site';
 </section>
 
 <style>
-  .hero { min-height: 390px; position: relative; overflow: hidden; background: #080808; display: flex; align-items: center; border-bottom: 1px solid #29211e; }
+  .hero { min-height: 390px; position: relative; overflow: hidden; background: var(--bg); display: flex; align-items: center; border-bottom: 1px solid var(--line); }
   .hero::before {
     content: ""; position: absolute; inset: 0; opacity: .92;
     background:
-      linear-gradient(90deg, #080808 0%, #080808ed 28%, #08080820 67%, #08080890 100%),
+      linear-gradient(90deg, rgb(var(--overlay)) 0%, rgb(var(--overlay) / .93) 28%, rgb(var(--overlay) / .13) 67%, rgb(var(--overlay) / .56) 100%),
       url('/images/hero.jpg') center 42% / cover no-repeat;
   }
   .hero-content { position: relative; padding: 58px 0 46px; max-width: 560px; }
   h1 { font-size: clamp(42px, 6vw, 78px); line-height: .92; letter-spacing: 1px; margin: 22px 0 18px; font-weight: 900; }
-  p { font-family: Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.45; color: #d3cdc6; max-width: 370px; margin: 0 0 25px; }
+  p { font-family: Georgia, serif; font-style: italic; font-size: 20px; line-height: 1.45; color: var(--text-2); max-width: 370px; margin: 0 0 25px; }
 
   @media (max-width: 760px) {
     .hero { min-height: 440px; align-items: end; }
     .hero::before {
       background:
-        linear-gradient(0deg, #080808 0%, #080808d9 32%, #08080820 100%),
+        linear-gradient(0deg, rgb(var(--overlay)) 0%, rgb(var(--overlay) / .85) 32%, rgb(var(--overlay) / .13) 100%),
         url('/images/hero.jpg') 57% center / cover no-repeat;
     }
     .hero-content { padding: 160px 0 35px; }

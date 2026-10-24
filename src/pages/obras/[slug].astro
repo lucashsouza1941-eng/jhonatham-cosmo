@@ -32,10 +32,10 @@ const descricao = obra.descricao ?? `${obra.titulo} — obra autoral de Jhonatha
 
 <style>
   .detail { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-  img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border: 1px solid #ffffff20; }
+  img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border: 1px solid var(--line-strong); }
   h1 { font-size: clamp(32px, 5vw, 56px); letter-spacing: 1px; margin: 10px 0 12px; font-weight: 900; }
-  .meta { font-size: 12px; color: #b5b0aa; margin: 0 0 12px; }
+  .meta { font-size: 12px; color: var(--muted); margin: 0 0 12px; }
   .price { font-size: 20px; margin: 0 0 20px; }
-  .desc { font-family: Georgia, serif; font-style: italic; color: #d3cdc6; line-height: 1.6; max-width: 460px; margin-bottom: 26px; }
+  .desc { font-family: Georgia, serif; font-style: italic; color: var(--text-2); line-height: 1.6; max-width: 460px; margin-bottom: 26px; }
   @media (max-width: 760px) { .detail { grid-template-columns: 1fr; gap: 26px; } }
 </style>
