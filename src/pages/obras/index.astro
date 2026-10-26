@@ -1,7 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ObrasGrid from '../../components/ObrasGrid.astro';
-import { obras } from '../../data/obras';
+import { carregarObras } from '../../data/obras';
+
+const obras = await carregarObras();
 ---
 <Base title="Obras — Jhonatham Cosmo" description="Todas as obras autorais de Jhonatham Cosmo disponíveis para compra.">
   <section class="section">

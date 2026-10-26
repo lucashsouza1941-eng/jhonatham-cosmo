@@ -1,26 +1,24 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
-import { site, whatsappUrl } from '../data/site';
+import { whatsappUrl } from '../data/site';
+import { lerConfig, lerContato } from '../data/conteudo';
 
-const motivos = [
-  { titulo: 'Comprar uma obra', texto: 'Pergunte se a obra está disponível, prazos e valores de entrega.', msg: 'Olá, Jhonatham! Tenho interesse em comprar uma obra.' },
-  { titulo: 'Encomendar uma obra', texto: 'Uma peça nova, pensada a partir da sua ideia.', msg: 'Olá, Jhonatham! Gostaria de encomendar uma obra.' },
-  { titulo: 'Projeto personalizado', texto: 'Tattoo ou arte sob medida, do traço à tela.', msg: 'Olá, Jhonatham! Quero conversar sobre um projeto personalizado.' },
-];
+const [config, contato] = await Promise.all([lerConfig(), lerContato()]);
 
+// Instagram e TikTok só aparecem se o link estiver preenchido no painel.
 const canais = [
   { nome: 'WhatsApp', icone: 'whatsapp' as const, href: whatsappUrl('Olá, Jhonatham! Gostaria de conversar sobre suas obras.'), texto: 'Converse direto com o artista' },
-  { nome: 'Instagram', icone: 'instagram' as const, href: site.redes.instagram, texto: 'Acompanhe as obras' },
-  { nome: 'TikTok', icone: 'tiktok' as const, href: site.redes.tiktok, texto: 'Acompanhe as obras' },
-];
+  { nome: 'Instagram', icone: 'instagram' as const, href: config.instagram, texto: 'Acompanhe as obras' },
+  { nome: 'TikTok', icone: 'tiktok' as const, href: config.tiktok, texto: 'Acompanhe as obras' },
+].filter((c) => c.href);
 ---
-<Base title="Contato — Jhonatham Cosmo" description="Fale com Jhonatham Cosmo para comprar, encomendar uma obra ou criar um projeto personalizado." image="/images/contato.jpg">
-  <section class="contact-hero">
+<Base title="Contato — Jhonatham Cosmo" description={contato.texto} image={contato.imagem}>
+  <section class="contact-hero" style={`--foto: url('${contato.imagem}')`}>
     <div class="wrap">
       <div class="eyebrow">Contato</div>
-      <h1>VAMOS CONVERSAR?</h1>
-      <p>Tem alguma dúvida, quer encomendar uma obra ou criar um projeto personalizado? Fale comigo.</p>
+      <h1>{contato.titulo}</h1>
+      <p>{contato.texto}</p>
       <a class="btn" href={whatsappUrl('Olá, Jhonatham! Gostaria de conversar sobre suas obras.')} target="_blank" rel="noopener">
         <Icon name="whatsapp" size={18} /> Chamar no WhatsApp <span aria-hidden="true">→</span>
       </a>
@@ -31,8 +29,8 @@ const canais = [
     <div class="wrap">
       <div class="section-head"><div><div class="eyebrow">Como posso ajudar</div><h2>SOBRE O QUE VAMOS FALAR?</h2></div></div>
       <div class="motivos">
-        {motivos.map((m) => (
-          <a class="motivo" href={whatsappUrl(m.msg)} target="_blank" rel="noopener">
+        {contato.motivos.map((m) => (
+          <a class="motivo" href={whatsappUrl(m.mensagem)} target="_blank" rel="noopener">
             <strong>{m.titulo}</strong>
             <span>{m.texto}</span>
             <em>Conversar <span aria-hidden="true">→</span></em>
@@ -60,10 +58,10 @@ const canais = [
 <style>
   .contact-hero {
     padding: 80px 0 70px; border-bottom: 1px solid var(--line);
-    background: linear-gradient(90deg, rgb(var(--overlay) / .95) 0%, rgb(var(--overlay) / .78) 55%, rgb(var(--overlay) / .5) 100%), url('/images/contato.jpg') center / cover no-repeat;
+    background: linear-gradient(90deg, rgb(var(--overlay) / .95) 0%, rgb(var(--overlay) / .78) 55%, rgb(var(--overlay) / .5) 100%), var(--foto) center / cover no-repeat;
   }
   h1 { font-size: clamp(34px, 6vw, 64px); font-weight: 900; letter-spacing: 1px; margin: 16px 0 14px; }
-  .contact-hero p { font-family: Georgia, serif; font-style: italic; font-size: 19px; line-height: 1.5; color: var(--text-2); max-width: 520px; margin: 0 0 28px; }
+  .contact-hero p { white-space: pre-line; font-family: Georgia, serif; font-style: italic; font-size: 19px; line-height: 1.5; color: var(--text-2); max-width: 520px; margin: 0 0 28px; }
 
   .motivos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .motivo { display: flex; flex-direction: column; gap: 10px; padding: 26px 24px; border: 1px solid var(--line); background: var(--panel); transition: border-color .2s; }

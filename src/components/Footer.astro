@@ -1,6 +1,8 @@
 ---
 import Icon from './Icon.astro';
-import { nav, site, whatsappUrl } from '../data/site';
+import { nav, whatsappUrl } from '../data/site';
+import { lerConfig } from '../data/conteudo';
+const config = await lerConfig();
 const ano = new Date().getFullYear();
 ---
 <footer class="wrap footer">
@@ -10,11 +12,11 @@ const ano = new Date().getFullYear();
   </nav>
   <div class="footer-right">
     <div class="social">
-      <a href={site.redes.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" /></a>
+      {config.instagram && <a href={config.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon name="instagram" /></a>}
       <a href={whatsappUrl('Olá! Gostaria de saber mais sobre as obras do Jhonatham Cosmo.')} target="_blank" rel="noopener" aria-label="WhatsApp"><Icon name="whatsapp" /></a>
-      <a href={site.redes.tiktok} target="_blank" rel="noopener" aria-label="TikTok"><Icon name="tiktok" /></a>
+      {config.tiktok && <a href={config.tiktok} target="_blank" rel="noopener" aria-label="TikTok"><Icon name="tiktok" /></a>}
     </div>
-    <div class="copyright">JHONATHAM COSMO · © {ano} · TODOS OS DIREITOS RESERVADOS</div>
+    <div class="copyright">{config.nome.toUpperCase()} · © {ano} · TODOS OS DIREITOS RESERVADOS</div>
   </div>
 </footer>
 

@@ -1,5 +1,7 @@
 ---
-import { beneficios } from '../data/site';
+import { lerConfig } from '../data/conteudo';
+
+const { beneficios } = await lerConfig();
 ---
 <section class="wrap benefits" aria-label="Vantagens">
   {beneficios.map((b) => (

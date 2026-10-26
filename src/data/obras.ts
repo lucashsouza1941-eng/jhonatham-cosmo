@@ -1,5 +1,6 @@
-// Catálogo de obras. Para adicionar uma obra: coloque a imagem em
-// public/images/obras/ e acrescente um item nesta lista.
+// Catálogo de obras. As obras são cadastradas no painel (/keystatic → Obras)
+// e ficam em src/content/obras/*.yaml.
+import { lerObras } from './conteudo';
 
 export interface Obra {
   slug: string;
@@ -8,53 +9,30 @@ export interface Obra {
   dimensoes: string;     // ex.: "100 × 70 cm"
   preco: number;         // em reais
   imagem: string;        // caminho a partir de /public
-  destaque?: boolean;    // aparece na home
-  disponivel?: boolean;  // false = "Vendida"
+  destaque: boolean;     // aparece na home
+  disponivel: boolean;   // false = "Vendida"
   descricao?: string;
 }
 
-export const obras: Obra[] = [
-  {
-    slug: 'conexao',
-    titulo: 'Conexão',
-    tecnica: 'Original · Tela',
-    dimensoes: '100 × 70 cm',
-    preco: 3500,
-    imagem: '/images/obras/conexao.jpg',
-    destaque: true,
-    disponivel: true,
-  },
-  {
-    slug: 'essencia',
-    titulo: 'Essência',
-    tecnica: 'Original · Tela',
-    dimensoes: '120 × 80 cm',
-    preco: 4200,
-    imagem: '/images/obras/essencia.jpg',
-    destaque: true,
-    disponivel: true,
-  },
-  {
-    slug: 'observador',
-    titulo: 'Observador',
-    tecnica: 'Original · Tela',
-    dimensoes: '90 × 60 cm',
-    preco: 2800,
-    imagem: '/images/obras/observador.jpg',
-    destaque: true,
-    disponivel: true,
-  },
-  {
-    slug: 'conflito',
-    titulo: 'Conflito',
-    tecnica: 'Original · Tela',
-    dimensoes: '100 × 70 cm',
-    preco: 3200,
-    imagem: '/images/obras/conflito.jpg',
-    destaque: true,
-    disponivel: true,
-  },
-];
+// Ordenadas pelo campo "Ordem" do painel (menor primeiro), depois pelo título.
+export async function carregarObras(): Promise<Obra[]> {
+  const entradas = await lerObras();
+  return entradas
+    .map(({ slug, entry }) => ({
+      slug,
+      titulo: entry.titulo,
+      tecnica: entry.tecnica,
+      dimensoes: entry.dimensoes,
+      preco: entry.preco ?? 0,
+      imagem: entry.imagem,
+      destaque: entry.destaque,
+      disponivel: entry.disponivel,
+      descricao: entry.descricao || undefined,
+      ordem: entry.ordem ?? 100,
+    }))
+    .sort((a, b) => a.ordem - b.ordem || a.titulo.localeCompare(b.titulo, 'pt-BR'))
+    .map(({ ordem: _, ...obra }) => obra);
+}
 
 export const formatarPreco = (valor: number) =>
   valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });

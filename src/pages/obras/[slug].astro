@@ -1,14 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { obras, formatarPreco, type Obra } from '../../data/obras';
+import { carregarObras, formatarPreco, type Obra } from '../../data/obras';
 import { whatsappUrl } from '../../data/site';
 
-export function getStaticPaths() {
-  return obras.map((obra) => ({ params: { slug: obra.slug }, props: { obra } }));
+export async function getStaticPaths() {
+  return (await carregarObras()).map((obra) => ({ params: { slug: obra.slug }, props: { obra } }));
 }
 
 const { obra } = Astro.props as { obra: Obra };
-const disponivel = obra.disponivel !== false;
+const disponivel = obra.disponivel;
 const descricao = obra.descricao ?? `${obra.titulo} — obra autoral de Jhonatham Cosmo. ${obra.tecnica}, ${obra.dimensoes}.`;
 ---
 <Base title={`${obra.titulo} — Jhonatham Cosmo`} description={descricao} image={obra.imagem}>

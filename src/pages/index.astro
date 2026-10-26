@@ -3,9 +3,9 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import ObrasGrid from '../components/ObrasGrid.astro';
 import Beneficios from '../components/Beneficios.astro';
-import { obras } from '../data/obras';
+import { carregarObras } from '../data/obras';
 
-const destaques = obras.filter((o) => o.destaque).slice(0, 4);
+const destaques = (await carregarObras()).filter((o) => o.destaque).slice(0, 4);
 ---
 <Base>
   <Hero />

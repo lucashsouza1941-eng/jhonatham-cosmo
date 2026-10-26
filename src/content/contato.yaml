@@ -1,0 +1,13 @@
+titulo: VAMOS CONVERSAR?
+texto: Tem alguma dúvida, quer encomendar uma obra ou criar um projeto personalizado? Fale comigo.
+imagem: /images/contato/imagem.jpg
+motivos:
+  - titulo: Comprar uma obra
+    texto: Pergunte se a obra está disponível, prazos e valores de entrega.
+    mensagem: Olá, Jhonatham! Tenho interesse em comprar uma obra.
+  - titulo: Encomendar uma obra
+    texto: Uma peça nova, pensada a partir da sua ideia.
+    mensagem: Olá, Jhonatham! Gostaria de encomendar uma obra.
+  - titulo: Projeto personalizado
+    texto: Tattoo ou arte sob medida, do traço à tela.
+    mensagem: Olá, Jhonatham! Quero conversar sobre um projeto personalizado.

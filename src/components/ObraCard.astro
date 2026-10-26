@@ -6,7 +6,7 @@ import { whatsappUrl } from '../data/site';
 
 interface Props { obra: Obra }
 const { obra } = Astro.props;
-const disponivel = obra.disponivel !== false;
+const disponivel = obra.disponivel;
 const msgCompra = `Olá, tenho interesse na obra ${obra.titulo} do Jhonatham Cosmo. Ela está disponível?`;
 const msgDuvida = `Olá! Gostaria de saber mais sobre a obra ${obra.titulo}.`;
 ---

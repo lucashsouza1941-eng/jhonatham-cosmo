@@ -1,5 +1,8 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import react from '@astrojs/react';
+import keystatic from '@keystatic/astro';
+import vercel from '@astrojs/vercel';
 import { loadEnv } from 'vite';
 
 // Sem o WhatsApp real, todos os botões "Comprar" levariam a um número errado.
@@ -16,5 +19,12 @@ if (!whatsapp || !/^55\d{10,11}$/.test(whatsapp) || whatsapp === '5511999999999'
 // Troque pelo domínio final quando publicar (usado em URLs canônicas / Open Graph / sitemap)
 export default defineConfig({
   site: 'https://jhonathamcosmo.com.br',
-  integrations: [sitemap()],
+  // As páginas do site continuam estáticas; só o painel (/keystatic e /api/keystatic)
+  // roda no servidor da Vercel.
+  adapter: vercel(),
+  integrations: [
+    react(),
+    keystatic(),
+    sitemap({ filter: (pagina) => !pagina.includes('/keystatic') }),
+  ],
 });
